@@ -1,0 +1,62 @@
+name: CI Postman
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+defaults:
+  run:
+    working-directory: b2b-ecommerce-platform
+
+jobs:
+  postman-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: b2b-ecommerce-platform/tests/postman/package-lock.json
+
+      - name: Create CI environment file
+        run: echo "DB_PASSWORD=ci" > .env
+
+      - name: Start backend and database
+        run: docker compose up -d --build postgres backend
+
+      - name: Wait for backend health
+        run: |
+          for i in $(seq 1 60); do
+            if curl -sf http://localhost:8080/api/health; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Backend did not become healthy in time"
+          docker compose logs backend
+          exit 1
+
+      - name: Install Postman test dependencies
+        working-directory: b2b-ecommerce-platform/tests/postman
+        run: npm ci
+
+      - name: Run Newman collection
+        working-directory: b2b-ecommerce-platform/tests/postman
+        run: npm test
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: postman-report
+          path: b2b-ecommerce-platform/tests/postman/reports/
+          if-no-files-found: warn
+
+      - name: Stop Docker stack
+        if: always()
+        run: docker compose down -v

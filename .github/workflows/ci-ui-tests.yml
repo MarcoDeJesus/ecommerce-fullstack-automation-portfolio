@@ -1,0 +1,85 @@
+name: CI UI Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+defaults:
+  run:
+    working-directory: b2b-ecommerce-platform
+
+jobs:
+  ui-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: b2b-ecommerce-platform/tests/playwright/package-lock.json
+
+      - name: Create CI environment file
+        run: echo "DB_PASSWORD=ci" > .env
+
+      - name: Start full stack
+        run: docker compose up -d --build
+
+      - name: Wait for backend health
+        run: |
+          for i in $(seq 1 60); do
+            if curl -sf http://localhost:8080/api/health; then
+              break
+            fi
+            sleep 2
+          done
+          curl -sf http://localhost:8080/api/health || (docker compose logs && exit 1)
+
+      - name: Wait for frontend
+        run: |
+          for i in $(seq 1 60); do
+            if curl -sf http://localhost:3000/; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Frontend did not become ready in time"
+          docker compose logs frontend
+          exit 1
+
+      - name: Install Playwright dependencies
+        working-directory: b2b-ecommerce-platform/tests/playwright
+        run: npm ci
+
+      - name: Install Playwright browser
+        working-directory: b2b-ecommerce-platform/tests/playwright
+        run: npx playwright install --with-deps ${{ matrix.browser }}
+
+      - name: Run UI tests
+        working-directory: b2b-ecommerce-platform/tests/playwright
+        env:
+          CI: true
+          PLAYWRIGHT_BASE_URL: http://localhost:3000
+        run: npx playwright test --project=${{ matrix.browser }}
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-${{ matrix.browser }}
+          path: |
+            b2b-ecommerce-platform/tests/playwright/playwright-report/
+            b2b-ecommerce-platform/tests/playwright/test-results/
+          if-no-files-found: warn
+
+      - name: Stop Docker stack
+        if: always()
+        run: docker compose down -v

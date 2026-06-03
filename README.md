@@ -1,5 +1,12 @@
 # Ecommerce Fullstack Automation Portfolio
 
+[![CI Backend](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/ci-backend.yml/badge.svg?branch=main)](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/ci-backend.yml)
+[![CI Frontend](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/ci-frontend.yml/badge.svg?branch=main)](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/ci-frontend.yml)
+[![CI API Tests](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/ci-api-tests.yml/badge.svg?branch=main)](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/ci-api-tests.yml)
+[![CI UI Tests](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/ci-ui-tests.yml/badge.svg?branch=main)](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/ci-ui-tests.yml)
+[![CI Postman](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/ci-postman.yml/badge.svg?branch=main)](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/ci-postman.yml)
+[![Deploy Demo](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/deploy-demo.yml/badge.svg?branch=main)](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/deploy-demo.yml)
+
 A portfolio project showcasing a **B2B ecommerce platform** with a full-stack implementation and a multi-layer test automation suite. The application provides product catalog management through a REST API, a React admin UI, and PostgreSQL persistence, all runnable locally or via Docker Compose.
 
 ## Features
@@ -125,6 +132,23 @@ Example product payload:
 ```
 
 Spring Actuator endpoints (`/actuator/health`, `/actuator/info`) are also exposed for observability.
+
+## CI/CD
+
+GitHub Actions runs on every push and pull request to `main` and `develop`:
+
+| Workflow | Description |
+|----------|-------------|
+| `ci-backend.yml` | Maven build, unit tests, JAR artifact |
+| `ci-frontend.yml` | npm lint, build, `dist/` artifact |
+| `ci-api-tests.yml` | Docker backend + Mocha API tests, JUnit report |
+| `ci-ui-tests.yml` | Full Docker stack + Playwright (chromium, firefox, webkit matrix) |
+| `ci-postman.yml` | Docker backend + Newman collection, HTML report |
+| `deploy-demo.yml` | Deploy frontend demo to GitHub Pages (push to `main` only) |
+
+**Live demo (UI):** [https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/)
+
+The Pages demo is a static frontend build. Product CRUD requires a running backend (local Docker or `make dev`). Enable GitHub Pages with source **GitHub Actions** in repository settings before the first deploy.
 
 ## Running Tests
 

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "mocha --require tsx 'specs/**/*.spec.ts'",
+    "test:ci": "mkdir -p reports && mocha --require tsx --reporter mocha-junit-reporter --reporter-options mochaFile=reports/junit.xml 'specs/**/*.spec.ts'",
     "test:watch": "mocha --require tsx 'specs/**/*.spec.ts' --watch"
   },
   "devDependencies": {
@@ -13,6 +14,7 @@
     "@types/supertest": "^6.0.3",
     "chai": "^4.5.0",
     "mocha": "^10.8.2",
+    "mocha-junit-reporter": "^2.2.1",
     "supertest": "^7.1.1",
     "tsx": "^4.19.4",
     "typescript": "^5.8.3"
