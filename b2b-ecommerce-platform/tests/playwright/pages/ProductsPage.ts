@@ -22,14 +22,14 @@ export class ProductsPage {
   }
 
   async waitForProductsLoaded(): Promise<void> {
-    await expect(this.page.getByText('Cargando productos...')).not.toBeVisible();
+    await expect(this.page.getByText('Loading products...')).not.toBeVisible();
   }
 
   async expectPageLoaded(): Promise<void> {
     await expect(this.page).toHaveTitle(/B2B Ecommerce/);
     await expect(this.page.getByRole('heading', { name: 'B2B Ecommerce' })).toBeVisible();
-    await expect(this.page.getByRole('heading', { name: 'Nuevo producto' })).toBeVisible();
-    await expect(this.page.getByText('Gestión de productos')).toBeVisible();
+    await expect(this.page.getByRole('heading', { name: 'New product' })).toBeVisible();
+    await expect(this.page.getByText('Product management')).toBeVisible();
   }
 
   getRowByName(name: string): Locator {
@@ -49,11 +49,11 @@ export class ProductsPage {
   }
 
   async clickEdit(name: string): Promise<void> {
-    await this.getRowByName(name).getByRole('button', { name: 'Editar' }).click();
+    await this.getRowByName(name).getByRole('button', { name: 'Edit' }).click();
   }
 
   async clickDelete(name: string): Promise<void> {
-    await this.getRowByName(name).getByRole('button', { name: 'Eliminar' }).click();
+    await this.getRowByName(name).getByRole('button', { name: 'Delete' }).click();
   }
 
   async createProduct(data: ProductData): Promise<void> {

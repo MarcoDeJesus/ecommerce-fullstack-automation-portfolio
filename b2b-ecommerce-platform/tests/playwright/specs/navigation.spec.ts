@@ -10,19 +10,19 @@ test.describe('Navigation', () => {
     await productsPage.goto();
   });
 
-  test('homepage carga con título y heading B2B Ecommerce', async ({ page }) => {
+  test('homepage loads with title and B2B Ecommerce heading', async ({ page }) => {
     await expect(page).toHaveTitle(/B2B Ecommerce/);
     await productsPage.expectPageLoaded();
   });
 
-  test('secciones principales visibles', async ({ page }) => {
+  test('main sections are visible', async ({ page }) => {
     await productsPage.expectPageLoaded();
-    await expect(page.getByRole('columnheader', { name: 'Nombre' })).toBeVisible();
-    await expect(page.getByRole('columnheader', { name: 'Precio' })).toBeVisible();
+    await expect(page.getByRole('columnheader', { name: 'Name' })).toBeVisible();
+    await expect(page.getByRole('columnheader', { name: 'Price' })).toBeVisible();
     await expect(page.getByRole('columnheader', { name: 'Stock' })).toBeVisible();
   });
 
-  test('abrir modal editar y cancelar cierra el modal', async () => {
+  test('open edit modal and cancel closes the modal', async () => {
     const product = randomProduct();
 
     await productsPage.createProduct(product);
@@ -33,7 +33,7 @@ test.describe('Navigation', () => {
     await productsPage.expectProductInTable(product);
   });
 
-  test('abrir modal eliminar y cancelar cierra el modal', async () => {
+  test('open delete modal and cancel closes the modal', async () => {
     const product = randomProduct();
 
     await productsPage.createProduct(product);

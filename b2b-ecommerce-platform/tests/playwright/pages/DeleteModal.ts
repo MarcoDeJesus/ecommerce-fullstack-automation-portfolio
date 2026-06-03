@@ -10,14 +10,14 @@ export class DeleteModal {
     this.page = page;
     this.container = page
       .locator('.fixed.inset-0')
-      .filter({ has: page.getByRole('heading', { name: 'Confirmar eliminación' }) });
-    this.confirmButton = this.container.getByRole('button', { name: 'Confirmar eliminación' });
-    this.cancelButton = this.container.getByRole('button', { name: 'Cancelar' });
+      .filter({ has: page.getByRole('heading', { name: 'Confirm deletion' }) });
+    this.confirmButton = this.container.getByRole('button', { name: 'Confirm deletion' });
+    this.cancelButton = this.container.getByRole('button', { name: 'Cancel' });
   }
 
   async expectOpen(productName: string): Promise<void> {
     await expect(this.container).toBeVisible();
-    await expect(this.page.getByRole('heading', { name: 'Confirmar eliminación' })).toBeVisible();
+    await expect(this.page.getByRole('heading', { name: 'Confirm deletion' })).toBeVisible();
     await expect(this.container.getByText(productName)).toBeVisible();
   }
 

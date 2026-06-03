@@ -126,11 +126,12 @@ jobs:
 
       - name: Assemble GitHub Pages site
         run: |
-          mkdir -p site/reports/allure site/reports/playwright site/reports/newman
+          mkdir -p site/reports/allure site/reports/playwright site/reports/newman site/reports/coverage
           cp -r frontend/dist/* site/
           cp -r allure-report/* site/reports/allure/
           cp -r tests/playwright/playwright-report/* site/reports/playwright/
           cp tests/postman/reports/ecommerce-report.html site/reports/newman/index.html
+          cp -r backend/target/site/jacoco/* site/reports/coverage/
           cp docs/reports-index.html site/reports/index.html
 
       - name: Upload Pages artifact

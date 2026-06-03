@@ -4,7 +4,7 @@
 
 📍 Remote — Based in Mexico (US Time Zone)  
 📞 +1 858 933 4510 | ✉️ marco_dejesus@live.com  
-🔗 [LinkedIn](https://www.linkedin.com/in/marco-antonio-de-jesus-ciriaco/) | [Portfolio](https://marcodejesus.github.io/) | [Live Demo](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/) | [Allure Report](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/allure/)
+🔗 [LinkedIn](https://www.linkedin.com/in/marco-antonio-de-jesus-ciriaco/) | [Portfolio](https://marcodejesus.github.io/) | [Live Demo](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/) | [Allure Report](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/allure/) | [Playwright Report](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/playwright/)
 
 [![CI Backend](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/ci-backend.yml/badge.svg?branch=main)](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/ci-backend.yml)
 [![CI Frontend](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/ci-frontend.yml/badge.svg?branch=main)](https://github.com/MarcoDeJesus/ecommerce-fullstack-automation-portfolio/actions/workflows/ci-frontend.yml)
@@ -22,13 +22,13 @@
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
-> **⚡ At a Glance (30 sec):** 14+ years · B2B contractor (1099/C2C) · Remote Mexico, US timezone · **$85–110/hr** · Axos: 6-month backlog → 4 weeks · 3-day regression → 1 hour · [Run the demo](#-verlo-es-creerlo--quick-demo) in 2 minutes.
+> **⚡ At a Glance (30 sec):** 14+ years · B2B contractor (1099/C2C) · Remote Mexico, US timezone · **$85–110/hr** · Axos: 6-month backlog → 4 weeks · 3-day regression → 1 hour · [Run the demo](#-quick-demo) in 2 minutes.
 
 ---
 
 ## 📋 Table of Contents
 
-- [Verlo es creerlo — Quick Demo](#-verlo-es-creerlo--quick-demo)
+- [Quick Demo](#-quick-demo)
 - [Value Proposition](#-value-proposition)
 - [Engagement Model](#-engagement-model)
 - [Core Competencies](#-core-competencies)
@@ -50,7 +50,7 @@
 
 ---
 
-## 👀 Verlo es creerlo — Quick Demo
+## 👀 Quick Demo
 
 > *See the full stack running in under 2 minutes. No sales call required.*
 
@@ -63,10 +63,15 @@ make up
 # → API: http://localhost:8080/api/health
 ```
 
-**Live demo:** [marcodejesus.github.io/ecommerce-fullstack-automation-portfolio](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/)  
-**Test reports:** [Allure](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/allure/) · [Playwright](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/playwright/) · [Newman](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/newman/)
+| Link | URL |
+|------|-----|
+| **Live demo** | [marcodejesus.github.io/ecommerce-fullstack-automation-portfolio](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/) |
+| **Allure (unified)** | [reports/allure](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/allure/) |
+| **Playwright HTML** | [reports/playwright](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/playwright/) |
+| **Newman / Postman** | [reports/newman](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/newman/) |
+| **All reports** | [reports](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/) |
 
-The Docker stack starts PostgreSQL, Spring Boot API, and React admin UI together. Product CRUD works out of the box.
+The Docker stack starts PostgreSQL, Spring Boot API, and React admin UI together. Product CRUD works out of the box. The live demo on GitHub Pages also links to Allure and Playwright from the app header.
 
 ---
 
@@ -345,9 +350,12 @@ make allure-open       # open report in browser
 | **Allure (unified)** | [GitHub Pages](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/allure/) | `make test-allure && make allure-report` |
 | **Playwright HTML** | [GitHub Pages](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/playwright/) | `cd tests/playwright && npx playwright show-report` |
 | **Newman / Postman** | [GitHub Pages](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/newman/) | `open tests/postman/reports/ecommerce-report.html` |
-| **Coverage (JaCoCo)** | [Codecov](https://codecov.io/gh/MarcoDeJesus/ecommerce-fullstack-automation-portfolio) | `mvn -f backend verify` |
+| **Coverage (JaCoCo HTML)** | [GitHub Pages](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/coverage/) | `mvn -f backend verify` then open `backend/target/site/jacoco/index.html` |
+| **Coverage (Codecov)** | [Codecov](https://codecov.io/gh/MarcoDeJesus/ecommerce-fullstack-automation-portfolio) | `mvn -f backend verify` (uploaded by `ci-backend.yml`) |
 
 All reports are regenerated on every push to `main` and published alongside the live demo.
+
+> **Codecov badge:** Add the [Codecov GitHub App](https://github.com/apps/codecov) for this repository, or set the `CODECOV_TOKEN` repository secret from [codecov.io](https://codecov.io/gh/MarcoDeJesus/ecommerce-fullstack-automation-portfolio). Without it, the badge may stay empty even when JaCoCo runs successfully.
 
 ---
 

@@ -6,15 +6,15 @@ export interface ProductData {
 }
 
 export const VALIDATION_MESSAGES = {
-  nameRequired: 'El nombre es obligatorio',
-  pricePositive: 'El precio debe ser mayor que 0',
-  stockPositive: 'El stock debe ser mayor que 0',
+  nameRequired: 'Name is required',
+  pricePositive: 'Price must be greater than 0',
+  stockPositive: 'Stock must be greater than 0',
 } as const;
 
 export function formatPrice(price: number): string {
-  return new Intl.NumberFormat('es-ES', {
+  return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'EUR',
+    currency: 'USD',
   }).format(price);
 }
 

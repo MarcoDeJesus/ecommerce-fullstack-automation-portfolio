@@ -21,11 +21,11 @@ export class ProductFormModal {
     if (mode === 'edit') {
       this.container = page
         .locator('.fixed.inset-0')
-        .filter({ has: page.getByRole('heading', { name: 'Editar producto' }) });
+        .filter({ has: page.getByRole('heading', { name: 'Edit product' }) });
     } else {
       this.container = page
         .locator('.rounded-lg.border')
-        .filter({ has: page.getByRole('heading', { name: 'Nuevo producto' }) });
+        .filter({ has: page.getByRole('heading', { name: 'New product' }) });
     }
 
     this.nameInput = page.locator(`#${mode}-name`);
@@ -34,17 +34,17 @@ export class ProductFormModal {
     this.descriptionInput = page.locator(`#${mode}-description`);
     this.submitButton =
       mode === 'create'
-        ? page.getByRole('button', { name: 'Crear producto' })
-        : this.container.getByRole('button', { name: 'Guardar cambios' });
-    this.cancelButton = this.container.getByRole('button', { name: 'Cancelar' });
+        ? page.getByRole('button', { name: 'Create product' })
+        : this.container.getByRole('button', { name: 'Save changes' });
+    this.cancelButton = this.container.getByRole('button', { name: 'Cancel' });
   }
 
   async expectVisible(): Promise<void> {
     if (this.mode === 'edit') {
       await expect(this.container).toBeVisible();
-      await expect(this.page.getByRole('heading', { name: 'Editar producto' })).toBeVisible();
+      await expect(this.page.getByRole('heading', { name: 'Edit product' })).toBeVisible();
     } else {
-      await expect(this.page.getByRole('heading', { name: 'Nuevo producto' })).toBeVisible();
+      await expect(this.page.getByRole('heading', { name: 'New product' })).toBeVisible();
     }
   }
 

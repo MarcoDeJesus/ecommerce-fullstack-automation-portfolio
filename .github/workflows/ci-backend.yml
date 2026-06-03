@@ -27,11 +27,16 @@ jobs:
       - name: Build and run unit tests
         run: mvn -f backend -B verify
 
+      - name: Verify JaCoCo report exists
+        run: test -f backend/target/site/jacoco/jacoco.xml
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: b2b-ecommerce-platform/backend/target/site/jacoco/jacoco.xml
+          slug: MarcoDeJesus/ecommerce-fullstack-automation-portfolio
+          directory: b2b-ecommerce-platform
+          files: backend/target/site/jacoco/jacoco.xml
           flags: backend
           fail_ci_if_error: false
 

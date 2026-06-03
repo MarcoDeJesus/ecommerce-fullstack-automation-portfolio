@@ -12,6 +12,9 @@ import ProductForm from './components/ProductForm'
 import ProductList from './components/ProductList'
 import type { Product, ProductRequest } from './types/product'
 
+const reportHref = (path: string) =>
+  `${import.meta.env.BASE_URL}${path}`.replace(/\/+/g, '/')
+
 function App() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
@@ -86,15 +89,40 @@ function App() {
       <div className="mx-auto max-w-5xl px-4 py-8">
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">B2B Ecommerce</h1>
-          <p className="mt-1 text-gray-600">Gestión de productos</p>
+          <p className="mt-1 text-gray-600">Product management</p>
         </header>
 
         {isStaticDemo && (
-          <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-            <strong>Demo estática en GitHub Pages.</strong> Los datos se guardan solo en el
-            navegador. Para API real con PostgreSQL, ejecuta{' '}
-            <code className="rounded bg-amber-100 px-1">make up</code> en local.
-          </div>
+          <>
+            <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+              <strong>Static demo on GitHub Pages.</strong> Data is stored only in your
+              browser. For a live API with PostgreSQL, run{' '}
+              <code className="rounded bg-amber-100 px-1">make up</code> locally.
+            </div>
+            <div className="mb-6 rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-900">
+              <strong>Test reports:</strong>{' '}
+              <a
+                href={reportHref('reports/allure/')}
+                className="font-medium text-blue-700 underline hover:text-blue-900"
+              >
+                Allure
+              </a>
+              {' · '}
+              <a
+                href={reportHref('reports/playwright/')}
+                className="font-medium text-blue-700 underline hover:text-blue-900"
+              >
+                Playwright
+              </a>
+              {' · '}
+              <a
+                href={reportHref('reports/')}
+                className="font-medium text-blue-700 underline hover:text-blue-900"
+              >
+                All reports
+              </a>
+            </div>
+          </>
         )}
 
         {error && (
@@ -105,7 +133,7 @@ function App() {
               onClick={fetchProducts}
               className="ml-4 rounded-md bg-red-100 px-3 py-1.5 text-sm font-medium text-red-800 hover:bg-red-200"
             >
-              Reintentar
+              Retry
             </button>
           </div>
         )}

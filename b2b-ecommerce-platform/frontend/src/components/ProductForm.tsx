@@ -54,15 +54,15 @@ export default function ProductForm({
 
   const validate = (): boolean => {
     if (!form.name.trim()) {
-      setValidationError('El nombre es obligatorio')
+      setValidationError('Name is required')
       return false
     }
     if (form.price <= 0) {
-      setValidationError('El precio debe ser mayor que 0')
+      setValidationError('Price must be greater than 0')
       return false
     }
     if (form.stock <= 0) {
-      setValidationError('El stock debe ser mayor que 0')
+      setValidationError('Stock must be greater than 0')
       return false
     }
     setValidationError(null)
@@ -90,7 +90,7 @@ export default function ProductForm({
 
       <div>
         <label htmlFor={`${mode}-name`} className="mb-1 block text-sm font-medium text-gray-700">
-          Nombre *
+          Name *
         </label>
         <input
           id={`${mode}-name`}
@@ -106,7 +106,7 @@ export default function ProductForm({
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label htmlFor={`${mode}-price`} className="mb-1 block text-sm font-medium text-gray-700">
-            Precio *
+            Price *
           </label>
           <input
             id={`${mode}-price`}
@@ -140,7 +140,7 @@ export default function ProductForm({
 
       <div>
         <label htmlFor={`${mode}-description`} className="mb-1 block text-sm font-medium text-gray-700">
-          Descripción
+          Description
         </label>
         <textarea
           id={`${mode}-description`}
@@ -158,7 +158,7 @@ export default function ProductForm({
           disabled={isSubmitting}
           className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isSubmitting ? 'Guardando...' : mode === 'create' ? 'Crear producto' : 'Guardar cambios'}
+          {isSubmitting ? 'Saving...' : mode === 'create' ? 'Create product' : 'Save changes'}
         </button>
         {mode === 'edit' && (
           <button
@@ -167,7 +167,7 @@ export default function ProductForm({
             disabled={isSubmitting}
             className="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Cancelar
+            Cancel
           </button>
         )}
       </div>
@@ -177,7 +177,7 @@ export default function ProductForm({
   if (mode === 'create') {
     return (
       <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">Nuevo producto</h2>
+        <h2 className="mb-4 text-lg font-semibold text-gray-900">New product</h2>
         {formContent}
       </div>
     )
@@ -188,7 +188,7 @@ export default function ProductForm({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
-        <h2 className="mb-4 text-lg font-semibold text-gray-900">Editar producto</h2>
+        <h2 className="mb-4 text-lg font-semibold text-gray-900">Edit product</h2>
         {formContent}
       </div>
     </div>

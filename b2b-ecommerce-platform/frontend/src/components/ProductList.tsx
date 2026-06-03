@@ -8,9 +8,9 @@ interface ProductListProps {
 }
 
 function formatPrice(price: number): string {
-  return new Intl.NumberFormat('es-ES', {
+  return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'EUR',
+    currency: 'USD',
   }).format(price)
 }
 
@@ -23,7 +23,7 @@ export default function ProductList({
   if (loading) {
     return (
       <div className="flex items-center justify-center rounded-lg border border-gray-200 bg-white p-12">
-        <p className="text-gray-500">Cargando productos...</p>
+        <p className="text-gray-500">Loading products...</p>
       </div>
     )
   }
@@ -31,7 +31,7 @@ export default function ProductList({
   if (products.length === 0) {
     return (
       <div className="rounded-lg border border-gray-200 bg-white p-12 text-center">
-        <p className="text-gray-500">No hay productos</p>
+        <p className="text-gray-500">No products yet</p>
       </div>
     )
   }
@@ -45,16 +45,16 @@ export default function ProductList({
               ID
             </th>
             <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-              Nombre
+              Name
             </th>
             <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-              Precio
+              Price
             </th>
             <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
               Stock
             </th>
             <th className="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">
-              Acciones
+              Actions
             </th>
           </tr>
         </thead>
@@ -79,14 +79,14 @@ export default function ProductList({
                   onClick={() => onEdit(product)}
                   className="mr-2 rounded-md bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-200"
                 >
-                  Editar
+                  Edit
                 </button>
                 <button
                   type="button"
                   onClick={() => onDelete(product)}
                   className="rounded-md bg-red-50 px-3 py-1.5 text-sm font-medium text-red-700 hover:bg-red-100"
                 >
-                  Eliminar
+                  Delete
                 </button>
               </td>
             </tr>

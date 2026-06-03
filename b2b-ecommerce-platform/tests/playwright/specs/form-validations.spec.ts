@@ -10,7 +10,7 @@ test.describe('Form validations', () => {
     await productsPage.goto();
   });
 
-  test('campos vacíos - nombre obligatorio', async () => {
+  test('empty name - shows validation error', async () => {
     const product = randomProduct();
 
     await productsPage.createForm.fill({ ...product, name: '   ' });
@@ -19,7 +19,7 @@ test.describe('Form validations', () => {
     await productsPage.expectProductNotInTable(product.name);
   });
 
-  test('precio negativo - muestra error de validación', async () => {
+  test('negative price - shows validation error', async () => {
     const product = randomProduct();
 
     await productsPage.createForm.fill({ ...product, price: -1 });
@@ -28,7 +28,7 @@ test.describe('Form validations', () => {
     await productsPage.expectProductNotInTable(product.name);
   });
 
-  test('precio cero - muestra error de validación', async () => {
+  test('zero price - shows validation error', async () => {
     const product = randomProduct();
 
     await productsPage.createForm.fill({ ...product, price: 0 });

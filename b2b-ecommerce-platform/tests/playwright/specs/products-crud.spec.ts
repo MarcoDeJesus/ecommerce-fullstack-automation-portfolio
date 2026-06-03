@@ -10,14 +10,14 @@ test.describe('Products CRUD', () => {
     await productsPage.goto();
   });
 
-  test('crear producto - llenar formulario y verificar en tabla', async () => {
+  test('create product - fill form and verify in table', async () => {
     const product = randomProduct();
 
     await productsPage.createProduct(product);
     await productsPage.expectProductInTable(product);
   });
 
-  test('editar producto - cambiar precio y confirmar actualización', async () => {
+  test('edit product - change price and confirm update', async () => {
     const product = randomProduct();
     const updatedPrice = 99.99;
 
@@ -31,7 +31,7 @@ test.describe('Products CRUD', () => {
     await productsPage.expectProductInTable({ ...product, price: updatedPrice });
   });
 
-  test('eliminar producto - confirmar y verificar desaparición', async () => {
+  test('delete product - confirm and verify removal', async () => {
     const product = randomProduct();
 
     await productsPage.createProduct(product);
@@ -43,7 +43,7 @@ test.describe('Products CRUD', () => {
     await productsPage.expectProductNotInTable(product.name);
   });
 
-  test('flujo completo - crear, editar y eliminar', async () => {
+  test('full flow - create, edit, and delete', async () => {
     const product = randomProduct();
     const updatedPrice = 49.5;
 
