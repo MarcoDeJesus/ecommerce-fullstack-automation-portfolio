@@ -1,4 +1,4 @@
-.PHONY: install dev docker-up docker-down build test test-api test-e2e test-postman
+.PHONY: install dev up down logs build docker-up docker-down test test-api test-e2e test-postman
 
 install:
 	mvn -f backend dependency:resolve -q
@@ -14,15 +14,22 @@ dev:
 	(cd frontend && npm run dev) & \
 	wait
 
-docker-up:
-	docker compose up --build -d
+up:
+	@test -f .env || (echo "Copy .env.example to .env first" && exit 1)
+	docker compose up -d --build
 
-docker-down:
+down:
 	docker compose down
 
+logs:
+	docker compose logs -f
+
 build:
-	mvn -f backend package -DskipTests -q
-	cd frontend && npm run build
+	docker compose build
+
+docker-up: up
+
+docker-down: down
 
 test: test-api test-postman test-e2e
 

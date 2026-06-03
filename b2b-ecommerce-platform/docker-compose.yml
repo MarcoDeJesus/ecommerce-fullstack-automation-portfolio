@@ -1,17 +1,18 @@
 services:
   postgres:
-    image: postgres:16-alpine
+    image: postgres:15
     container_name: b2b-postgres
     environment:
-      POSTGRES_DB: b2b_ecommerce
-      POSTGRES_USER: b2b_user
-      POSTGRES_PASSWORD: b2b_pass
+      POSTGRES_DB: ecommerce
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U b2b_user -d b2b_ecommerce"]
+      test: ["CMD-SHELL", "pg_isready -U admin -d ecommerce"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -21,14 +22,15 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: b2b-backend
-    environment:
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_NAME: b2b_ecommerce
-      DB_USER: b2b_user
-      DB_PASSWORD: b2b_pass
     ports:
       - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ecommerce
+      DB_USER: admin
+      DB_PASSWORD: ${DB_PASSWORD}
     depends_on:
       postgres:
         condition: service_healthy
@@ -39,7 +41,7 @@ services:
       dockerfile: Dockerfile
     container_name: b2b-frontend
     ports:
-      - "5173:5173"
+      - "3000:80"
     depends_on:
       - backend
 
