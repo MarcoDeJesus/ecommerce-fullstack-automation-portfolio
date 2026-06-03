@@ -1,7 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  testDir: './e2e',
+  testDir: './specs',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -9,6 +9,8 @@ export default defineConfig({
   reporter: 'html',
   use: {
     baseURL: 'http://localhost:5173',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
     trace: 'on-first-retry',
   },
   projects: [
