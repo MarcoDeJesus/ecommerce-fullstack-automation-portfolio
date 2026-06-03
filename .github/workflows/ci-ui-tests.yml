@@ -80,6 +80,14 @@ jobs:
             b2b-ecommerce-platform/tests/playwright/test-results/
           if-no-files-found: warn
 
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-playwright-${{ matrix.browser }}
+          path: b2b-ecommerce-platform/tests/playwright/allure-results/
+          if-no-files-found: warn
+
       - name: Stop Docker stack
         if: always()
         run: docker compose down -v

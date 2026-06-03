@@ -6,12 +6,14 @@
   "scripts": {
     "test": "mocha --require tsx 'specs/**/*.spec.ts'",
     "test:ci": "mkdir -p reports && mocha --require tsx --reporter mocha-junit-reporter --reporter-options mochaFile=reports/junit.xml 'specs/**/*.spec.ts'",
+    "test:allure": "mkdir -p allure-results && mocha --require tsx --reporter allure-mocha 'specs/**/*.spec.ts'",
     "test:watch": "mocha --require tsx 'specs/**/*.spec.ts' --watch"
   },
   "devDependencies": {
     "@types/chai": "^4.3.20",
     "@types/mocha": "^10.0.10",
     "@types/supertest": "^6.0.3",
+    "allure-mocha": "^3.0.9",
     "chai": "^4.5.0",
     "mocha": "^10.8.2",
     "mocha-junit-reporter": "^2.2.1",

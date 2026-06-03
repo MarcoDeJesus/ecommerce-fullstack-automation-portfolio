@@ -1,4 +1,4 @@
-.PHONY: install dev up down logs build docker-up docker-down test test-api test-e2e test-postman
+.PHONY: install dev up down logs build docker-up docker-down test test-api test-e2e test-postman test-allure allure-report allure-open
 
 install:
 	mvn -f backend dependency:resolve -q
@@ -41,3 +41,25 @@ test-e2e:
 
 test-postman:
 	cd tests/postman && npm test
+
+test-allure: test-api-allure test-postman-allure test-e2e-allure test-backend-allure
+
+test-backend-allure:
+	mvn -f backend -B test
+
+test-api-allure:
+	cd tests/api && npm run test:allure
+
+test-postman-allure:
+	cd tests/postman && npm test
+
+test-e2e-allure:
+	cd tests/playwright && npm run test:allure
+
+allure-report:
+	allure generate backend/target/allure-results tests/api/allure-results \
+		tests/playwright/allure-results tests/postman/allure-results \
+		-o allure-report --clean
+
+allure-open:
+	allure open allure-report

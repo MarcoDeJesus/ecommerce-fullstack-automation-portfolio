@@ -3,6 +3,7 @@ name: Deploy Demo
 on:
   push:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -13,12 +14,13 @@ concurrency:
   group: pages
   cancel-in-progress: true
 
+defaults:
+  run:
+    working-directory: b2b-ecommerce-platform
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: b2b-ecommerce-platform/frontend
     steps:
       - uses: actions/checkout@v4
 
@@ -27,21 +29,115 @@ jobs:
         with:
           node-version: "22"
           cache: npm
-          cache-dependency-path: b2b-ecommerce-platform/frontend/package-lock.json
+          cache-dependency-path: |
+            b2b-ecommerce-platform/frontend/package-lock.json
+            b2b-ecommerce-platform/tests/api/package-lock.json
+            b2b-ecommerce-platform/tests/playwright/package-lock.json
+            b2b-ecommerce-platform/tests/postman/package-lock.json
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+          cache-dependency-path: b2b-ecommerce-platform/backend/pom.xml
 
-      - name: Build for GitHub Pages
+      - name: Install Allure CLI
+        run: |
+          curl -Ls "https://github.com/allure-framework/allure2/releases/download/2.30.0/allure-2.30.0.tgz" -o allure.tgz
+          tar -xzf allure.tgz
+          echo "$PWD/allure-2.30.0/bin" >> "$GITHUB_PATH"
+
+      - name: Build frontend for GitHub Pages
+        working-directory: b2b-ecommerce-platform/frontend
         env:
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
           VITE_STATIC_DEMO: "true"
-        run: npm run build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Run backend unit tests
+        run: mvn -f backend -B verify
+
+      - name: Create CI environment file
+        run: echo "DB_PASSWORD=ci" > .env
+
+      - name: Start full stack
+        run: docker compose up -d --build
+
+      - name: Wait for backend health
+        run: |
+          for i in $(seq 1 60); do
+            if curl -sf http://localhost:8080/api/health; then
+              break
+            fi
+            sleep 2
+          done
+          curl -sf http://localhost:8080/api/health || (docker compose logs && exit 1)
+
+      - name: Wait for frontend
+        run: |
+          for i in $(seq 1 60); do
+            if curl -sf http://localhost:3000/; then
+              exit 0
+            fi
+            sleep 2
+          done
+          docker compose logs frontend
+          exit 1
+
+      - name: Install test dependencies
+        run: |
+          cd tests/api && npm ci
+          cd ../postman && npm ci
+          cd ../playwright && npm ci
+
+      - name: Run API tests with Allure
+        working-directory: b2b-ecommerce-platform/tests/api
+        run: npm run test:allure
+
+      - name: Run Newman tests with Allure
+        working-directory: b2b-ecommerce-platform/tests/postman
+        run: npm test
+
+      - name: Install Playwright browser
+        working-directory: b2b-ecommerce-platform/tests/playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright tests with Allure
+        working-directory: b2b-ecommerce-platform/tests/playwright
+        env:
+          CI: true
+          PLAYWRIGHT_BASE_URL: http://localhost:3000
+        run: npm run test:allure
+
+      - name: Generate unified Allure report
+        run: |
+          allure generate backend/target/allure-results \
+            tests/api/allure-results \
+            tests/playwright/allure-results \
+            tests/postman/allure-results \
+            -o allure-report --clean
+
+      - name: Assemble GitHub Pages site
+        run: |
+          mkdir -p site/reports/allure site/reports/playwright site/reports/newman
+          cp -r frontend/dist/* site/
+          cp -r allure-report/* site/reports/allure/
+          cp -r tests/playwright/playwright-report/* site/reports/playwright/
+          cp tests/postman/reports/ecommerce-report.html site/reports/newman/index.html
+          cp docs/reports-index.html site/reports/index.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: b2b-ecommerce-platform/frontend/dist
+          path: b2b-ecommerce-platform/site
+
+      - name: Stop Docker stack
+        if: always()
+        run: docker compose down -v
 
   deploy:
     needs: build

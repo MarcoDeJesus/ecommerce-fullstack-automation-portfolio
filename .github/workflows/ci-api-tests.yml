@@ -47,7 +47,7 @@ jobs:
 
       - name: Run API tests
         working-directory: b2b-ecommerce-platform/tests/api
-        run: npm run test:ci
+        run: npm run test:allure
 
       - name: Upload test report
         if: always()
@@ -55,6 +55,14 @@ jobs:
         with:
           name: api-test-report
           path: b2b-ecommerce-platform/tests/api/reports/
+          if-no-files-found: ignore
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-api
+          path: b2b-ecommerce-platform/tests/api/allure-results/
           if-no-files-found: warn
 
       - name: Stop Docker stack

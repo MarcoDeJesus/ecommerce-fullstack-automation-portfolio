@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "newman": "^6.2.1",
+    "newman-reporter-allure": "^1.0.4",
     "newman-reporter-htmlextra": "^1.23.1"
   }
 }

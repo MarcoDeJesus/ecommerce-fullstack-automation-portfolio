@@ -27,6 +27,22 @@ jobs:
       - name: Build and run unit tests
         run: mvn -f backend -B verify
 
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: b2b-ecommerce-platform/backend/target/site/jacoco/jacoco.xml
+          flags: backend
+          fail_ci_if_error: false
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-backend
+          path: b2b-ecommerce-platform/backend/target/allure-results/
+          if-no-files-found: warn
+
       - name: Upload JAR artifact
         uses: actions/upload-artifact@v4
         with:

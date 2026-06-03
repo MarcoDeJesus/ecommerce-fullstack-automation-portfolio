@@ -3,19 +3,25 @@ const path = require('path');
 const fs = require('fs');
 
 const reportsDir = path.join(__dirname, 'reports');
-if (!fs.existsSync(reportsDir)) {
-  fs.mkdirSync(reportsDir, { recursive: true });
+const allureDir = path.join(__dirname, 'allure-results');
+for (const dir of [reportsDir, allureDir]) {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
 }
 
 newman.run(
   {
     collection: require('./ecommerce-collection.json'),
     environment: require('./ecommerce-environment.json'),
-    reporters: ['cli', 'htmlextra'],
+    reporters: ['cli', 'htmlextra', 'allure'],
     reporter: {
       htmlextra: {
         export: path.join(reportsDir, 'ecommerce-report.html'),
         title: 'B2B Ecommerce API Report',
+      },
+      allure: {
+        export: allureDir,
       },
     },
   },

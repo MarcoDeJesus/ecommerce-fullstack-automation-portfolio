@@ -30,6 +30,12 @@ Thumbs.db
 playwright-report/
 test-results/
 tests/postman/reports/
+tests/api/allure-results/
+tests/playwright/allure-results/
+tests/postman/allure-results/
+allure-report/
+allure-results/
+site/
 coverage/
 .nyc_output/
 

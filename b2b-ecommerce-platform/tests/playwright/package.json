@@ -4,10 +4,12 @@
   "version": "0.0.1",
   "scripts": {
     "test": "playwright test",
+    "test:allure": "playwright test",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed"
   },
   "devDependencies": {
-    "@playwright/test": "1.60.0"
+    "@playwright/test": "1.60.0",
+    "allure-playwright": "^3.0.9"
   }
 }
