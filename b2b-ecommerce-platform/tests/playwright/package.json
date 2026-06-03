@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "scripts": {
     "test": "playwright test",
-    "test:allure": "playwright test",
+    "test:allure": "playwright test --project=chromium",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed"
   },
