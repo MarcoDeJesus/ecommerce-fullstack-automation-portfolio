@@ -35,6 +35,7 @@ jobs:
       - name: Build for GitHub Pages
         env:
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_STATIC_DEMO: "true"
         run: npm run build
 
       - name: Upload Pages artifact

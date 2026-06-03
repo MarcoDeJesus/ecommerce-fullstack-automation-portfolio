@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { apiBaseUrl } from '../config'
 
 interface ErrorResponse {
   message?: string
@@ -23,7 +24,7 @@ export function getErrorMessage(error: unknown): string {
 }
 
 const apiClient = axios.create({
-  baseURL: '/api',
+  baseURL: apiBaseUrl,
   headers: {
     'Content-Type': 'application/json',
   },

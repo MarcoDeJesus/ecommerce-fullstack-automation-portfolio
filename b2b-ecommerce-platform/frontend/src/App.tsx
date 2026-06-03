@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { getErrorMessage } from './api/client'
+import { isStaticDemo } from './config'
 import {
   createProduct,
   deleteProduct,
@@ -87,6 +88,14 @@ function App() {
           <h1 className="text-3xl font-bold text-gray-900">B2B Ecommerce</h1>
           <p className="mt-1 text-gray-600">Gestión de productos</p>
         </header>
+
+        {isStaticDemo && (
+          <div className="mb-6 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+            <strong>Demo estática en GitHub Pages.</strong> Los datos se guardan solo en el
+            navegador. Para API real con PostgreSQL, ejecuta{' '}
+            <code className="rounded bg-amber-100 px-1">make up</code> en local.
+          </div>
+        )}
 
         {error && (
           <div className="mb-6 flex items-center justify-between rounded-lg border border-red-200 bg-red-50 px-4 py-3">
