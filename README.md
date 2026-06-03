@@ -22,6 +22,8 @@
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
+> **⚡ At a Glance (30 sec):** 14+ years · B2B contractor (1099/C2C) · Remote Mexico, US timezone · **$85–110/hr** · Axos: 6-month backlog → 4 weeks · 3-day regression → 1 hour · [Run the demo](#-verlo-es-creerlo--quick-demo) in 2 minutes.
+
 ---
 
 ## 📋 Table of Contents
@@ -313,10 +315,18 @@ make allure-open       # open report in browser
 .
 ├── LICENSE
 ├── README.md
+├── .github/workflows/        # CI/CD pipelines
+│   ├── ci-backend.yml        # Maven build, JaCoCo, unit tests → Codecov
+│   ├── ci-frontend.yml       # Lint, build, artifact
+│   ├── ci-api-tests.yml      # Mocha API tests + Allure
+│   ├── ci-ui-tests.yml       # Playwright matrix + Allure
+│   ├── ci-postman.yml        # Newman + Allure
+│   └── deploy-demo.yml       # Deploy UI + test reports to GitHub Pages
 └── b2b-ecommerce-platform/
     ├── backend/              # Spring Boot REST API (Java 17)
     ├── frontend/             # React + Vite admin UI
     ├── docker/               # PostgreSQL init scripts
+    ├── docs/                 # Reports index for GitHub Pages
     ├── tests/
     │   ├── api/              # Mocha + Supertest integration tests
     │   ├── playwright/       # Playwright E2E (multi-browser)
@@ -324,13 +334,6 @@ make allure-open       # open report in browser
     ├── docker-compose.yml    # Full stack orchestration
     ├── Makefile              # Dev, test, and Allure commands
     └── .env.example          # Environment template (DB_PASSWORD)
-.github/workflows/
-    ├── ci-backend.yml        # Maven build, JaCoCo, unit tests
-    ├── ci-frontend.yml       # Lint, build, artifact
-    ├── ci-api-tests.yml      # Mocha API tests + Allure
-    ├── ci-ui-tests.yml       # Playwright matrix + Allure
-    ├── ci-postman.yml        # Newman + Allure
-    └── deploy-demo.yml       # Deploy UI + test reports to GitHub Pages
 ```
 
 ---
