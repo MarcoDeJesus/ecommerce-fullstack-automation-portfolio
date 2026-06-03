@@ -1,0 +1,14 @@
+{
+  "name": "b2b-ecommerce-api-tests",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "axios": "^1.9.0",
+    "vitest": "^3.2.4"
+  }
+}

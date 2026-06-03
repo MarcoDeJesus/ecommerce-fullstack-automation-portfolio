@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+target/
+build/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+playwright-report/
+test-results/
+coverage/
+.nyc_output/
+
+# Maven
+*.class
+*.jar
+*.war
+*.ear
+
+# TypeScript
+*.tsbuildinfo
+
+# Vite
+.vite/

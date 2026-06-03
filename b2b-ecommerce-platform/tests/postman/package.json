@@ -1,0 +1,11 @@
+{
+  "name": "b2b-ecommerce-postman",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "test": "newman run collections/b2b-api.postman_collection.json --env-var baseUrl=http://localhost:8080"
+  },
+  "devDependencies": {
+    "newman": "^6.2.1"
+  }
+}
