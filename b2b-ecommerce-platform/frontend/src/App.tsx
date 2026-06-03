@@ -1,37 +1,140 @@
-import { useEffect, useState } from 'react'
-import './App.css'
+import { useCallback, useEffect, useState } from 'react'
+import { getErrorMessage } from './api/client'
+import {
+  createProduct,
+  deleteProduct,
+  getProducts,
+  updateProduct,
+} from './api/products'
+import DeleteConfirmationModal from './components/DeleteConfirmationModal'
+import ProductForm from './components/ProductForm'
+import ProductList from './components/ProductList'
+import type { Product, ProductRequest } from './types/product'
 
 function App() {
-  const [healthStatus, setHealthStatus] = useState<string>('checking...')
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null)
+  const [deletingProduct, setDeletingProduct] = useState<Product | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
 
-  useEffect(() => {
-    fetch('/api/health')
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`)
-        return res.json()
-      })
-      .then((data: { status: string }) => setHealthStatus(data.status))
-      .catch((err: Error) => setError(err.message))
+  const fetchProducts = useCallback(async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      const data = await getProducts()
+      setProducts(data)
+    } catch (err) {
+      setError(getErrorMessage(err))
+    } finally {
+      setLoading(false)
+    }
   }, [])
 
+  useEffect(() => {
+    fetchProducts()
+  }, [fetchProducts])
+
+  const handleCreate = async (data: ProductRequest) => {
+    setIsSubmitting(true)
+    setError(null)
+    try {
+      await createProduct(data)
+      await fetchProducts()
+    } catch (err) {
+      setError(getErrorMessage(err))
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleUpdate = async (data: ProductRequest) => {
+    if (!editingProduct) return
+    setIsSubmitting(true)
+    setError(null)
+    try {
+      await updateProduct(editingProduct.id, data)
+      setEditingProduct(null)
+      await fetchProducts()
+    } catch (err) {
+      setError(getErrorMessage(err))
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleDeleteConfirm = async () => {
+    if (!deletingProduct) return
+    setIsDeleting(true)
+    setError(null)
+    try {
+      await deleteProduct(deletingProduct.id)
+      setDeletingProduct(null)
+      await fetchProducts()
+    } catch (err) {
+      setError(getErrorMessage(err))
+    } finally {
+      setIsDeleting(false)
+    }
+  }
+
   return (
-    <div className="app">
-      <header>
-        <h1>B2B Ecommerce</h1>
-        <p className="subtitle">Plataforma de comercio B2B</p>
-      </header>
+    <div className="min-h-screen bg-gray-100">
+      <div className="mx-auto max-w-5xl px-4 py-8">
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">B2B Ecommerce</h1>
+          <p className="mt-1 text-gray-600">Gestión de productos</p>
+        </header>
 
-      <section className="status-card">
-        <h2>Estado del backend</h2>
-        {error ? (
-          <p className="status error">Error: {error}</p>
-        ) : (
-          <p className="status">{healthStatus}</p>
+        {error && (
+          <div className="mb-6 flex items-center justify-between rounded-lg border border-red-200 bg-red-50 px-4 py-3">
+            <p className="text-sm text-red-700">{error}</p>
+            <button
+              type="button"
+              onClick={fetchProducts}
+              className="ml-4 rounded-md bg-red-100 px-3 py-1.5 text-sm font-medium text-red-800 hover:bg-red-200"
+            >
+              Reintentar
+            </button>
+          </div>
         )}
-      </section>
 
-      {/* TODO: Implementar rutas, catálogo, carrito B2B y autenticación de empresas */}
+        <div className="mb-6">
+          <ProductForm
+            mode="create"
+            isOpen
+            isSubmitting={isSubmitting && !editingProduct}
+            onSubmit={handleCreate}
+            onCancel={() => {}}
+          />
+        </div>
+
+        <ProductList
+          products={products}
+          loading={loading}
+          onEdit={setEditingProduct}
+          onDelete={setDeletingProduct}
+        />
+
+        <ProductForm
+          mode="edit"
+          initialData={editingProduct ?? undefined}
+          isOpen={editingProduct !== null}
+          isSubmitting={isSubmitting && editingProduct !== null}
+          onSubmit={handleUpdate}
+          onCancel={() => setEditingProduct(null)}
+        />
+
+        <DeleteConfirmationModal
+          product={deletingProduct}
+          isOpen={deletingProduct !== null}
+          isDeleting={isDeleting}
+          onConfirm={handleDeleteConfirm}
+          onCancel={() => setDeletingProduct(null)}
+        />
+      </div>
     </div>
   )
 }
