@@ -8,7 +8,7 @@ A portfolio project showcasing a **B2B ecommerce platform** with a full-stack im
 - **Admin UI** — React SPA to list, create, edit, and delete products
 - **PostgreSQL** — Relational storage with seed data for local development
 - **Docker Compose** — One-command stack: database, backend, and nginx-served frontend
-- **Test automation** — API tests (Vitest), E2E tests (Playwright), and contract checks (Newman/Postman)
+- **Test automation** — API tests (Mocha, Chai, Supertest), E2E tests (Playwright), and contract checks (Newman/Postman)
 
 ## Tech Stack
 
@@ -18,7 +18,7 @@ A portfolio project showcasing a **B2B ecommerce platform** with a full-stack im
 | Frontend | React 19, TypeScript, Vite, Tailwind CSS 4, Axios |
 | Database | PostgreSQL 15 |
 | Infrastructure | Docker, Docker Compose, nginx |
-| Testing | Vitest, Playwright, Newman (Postman) |
+| Testing | Mocha, Chai, Supertest, Playwright, Newman (Postman) |
 
 ## Project Structure
 
@@ -31,7 +31,7 @@ A portfolio project showcasing a **B2B ecommerce platform** with a full-stack im
     ├── frontend/         # React + Vite UI
     ├── docker/           # DB init scripts
     ├── tests/
-    │   ├── api/          # Vitest API integration tests
+    │   ├── api/          # Mocha API integration tests
     │   ├── playwright/   # E2E browser tests
     │   └── postman/      # Newman collection runner
     ├── docker-compose.yml
@@ -132,7 +132,7 @@ From `b2b-ecommerce-platform`, with the backend running on port 8080:
 
 ```bash
 make test          # Run all test suites
-make test-api      # Vitest API tests
+make test-api      # Mocha API tests (requires backend on :8080)
 make test-e2e      # Playwright E2E tests
 make test-postman  # Newman Postman collection
 ```
