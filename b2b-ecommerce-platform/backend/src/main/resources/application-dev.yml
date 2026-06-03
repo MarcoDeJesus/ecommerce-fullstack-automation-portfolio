@@ -1,0 +1,3 @@
+spring:
+  datasource:
+    password: ${DB_PASSWORD:b2b_pass}
