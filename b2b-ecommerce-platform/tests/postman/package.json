@@ -3,9 +3,11 @@
   "private": true,
   "version": "0.0.1",
   "scripts": {
-    "test": "newman run collections/b2b-api.postman_collection.json --env-var baseUrl=http://localhost:8080"
+    "test": "node newman-run.js",
+    "test:postman": "node newman-run.js"
   },
   "devDependencies": {
-    "newman": "^6.2.1"
+    "newman": "^6.2.1",
+    "newman-reporter-htmlextra": "^1.23.1"
   }
 }

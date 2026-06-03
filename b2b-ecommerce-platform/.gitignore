@@ -29,6 +29,7 @@ Thumbs.db
 # Test artifacts
 playwright-report/
 test-results/
+tests/postman/reports/
 coverage/
 .nyc_output/
 
