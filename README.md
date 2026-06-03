@@ -1,8 +1,8 @@
 # Marco De Jesus
 
-**B2B Automation Services | SDET as a Service | QA Infrastructure**
+**SDET & QA Automation Leader — 14+ years**
 
-📍 Remote — Based in Mexico (US Time Zone)  
+📍 W2 FTE @ Axos Bank — San Diego, CA (100% on-site)  
 📞 +1 858 933 4510 | ✉️ marco_dejesus@live.com  
 🔗 [LinkedIn](https://www.linkedin.com/in/marco-antonio-de-jesus-ciriaco/) | [Portfolio](https://marcodejesus.github.io/) | [Live Demo](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/) | [Allure Report](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/allure/) | [Playwright Report](https://marcodejesus.github.io/ecommerce-fullstack-automation-portfolio/reports/playwright/)
 
@@ -22,7 +22,7 @@
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
-> **⚡ At a Glance (30 sec):** 14+ years · B2B contractor (1099/C2C) · Remote Mexico, US timezone · **$85–110/hr** · Axos: 6-month backlog → 4 weeks · 3-day regression → 1 hour · [Run the demo](#-quick-demo) in 2 minutes.
+> **⚡ At a Glance (30 sec):** 14+ years · W2 FTE @ Axos Bank · 6-month backlog → 4 weeks · API 40% → 95% · 3-day regression → 1 hour · [Run the demo](#-quick-demo) in 2 minutes.
 
 ---
 
@@ -30,16 +30,15 @@
 
 - [Quick Demo](#-quick-demo)
 - [Value Proposition](#-value-proposition)
-- [Engagement Model](#-engagement-model)
+- [Employment Resume](#-employment-resume)
 - [Core Competencies](#-core-competencies)
 - [Technical Portfolio: Tools → Business Impact](#-technical-portfolio-tools--business-impact)
-- [Professional Engagements](#-professional-engagements)
-- [Earlier Engagements](#-earlier-engagements)
+- [Professional Experience](#-professional-experience)
+- [Earlier Experience](#-earlier-experience)
 - [Technical Proficiency](#-technical-proficiency)
 - [Certifications](#-certifications)
 - [Education](#-education)
 - [Languages](#-languages)
-- [Ready-to-Use for Recruiters](#-ready-to-use-for-recruiters)
 - [This Repo: Technologies Demonstrated](#-this-repo-technologies-demonstrated)
 - [Run Locally](#-run-locally)
 - [Project Structure](#-project-structure)
@@ -77,10 +76,26 @@ The Docker stack starts PostgreSQL, Spring Boot API, and React admin UI together
 
 ## 🎯 Value Proposition
 
-> *I don't fill a seat. I deliver automation infrastructure that eliminates backlogs, reduces headcount dependency, and accelerates releases. 14+ years. Bilingual. Available for 1099 or Corp-to-Corp. Remote from Mexico — you pay my invoice, not my benefits.*
+> *14+ years delivering test automation that eliminates backlogs, protects releases, and scales with the product. API, web, mobile, and AI-assisted frameworks — built for maintainability and measurable impact. Bilingual. Currently W2 FTE at Axos Bank, San Diego — full professional track record available for recruiter review.*
 
 ---
 
+## 📄 Employment Resume
+
+Employment resume and professional background for payroll-style evaluation.
+
+**W2 / Full-Time employee track record**
+
+- **Current:** W2 FTE, 100% on-site at Axos Bank, San Diego, CA
+- **Prior full-time roles in Mexico** (OfferUp, EPAM, Cognizant, and others)
+- **Enterprise API, web, mobile, and AI-powered test automation** — 14+ years
+
+[Employment resume on marcodejesus.github.io](https://marcodejesus.github.io/)
+
+---
+
+<!-- RESTORE_WHEN_LLC_READY: Engagement Model -->
+<!-- B2B_CONTENT_START
 ## 💼 Engagement Model
 
 | Model | Rate (USD) | Best For |
@@ -93,6 +108,7 @@ The Docker stack starts PostgreSQL, Spring Boot API, and React admin UI together
 > *All rates USD. Invoiced net-30. Wire / transfer. No W2. No overhead. Just delivery.*
 
 ---
+B2B_CONTENT_END -->
 
 ## 🧠 Core Competencies
 
@@ -118,12 +134,12 @@ The Docker stack starts PostgreSQL, Spring Boot API, and React admin UI together
 
 ---
 
-## 💼 Professional Engagements
+## 💼 Professional Experience
 
-### AI Automation Contractor — QA Infrastructure
-**Axos Bank | San Diego, CA (Remote from Mexico) | Apr 2022 – Present (3y 9m)**
+> *14+ years as a full-time employee — currently W2 FTE, 100% on-site at Axos Bank (San Diego, CA); earlier full-time roles in Mexico.*
 
-*Engagement: Solo contractor delivering AI-powered automation infrastructure*
+### Sr. SDET — AI Automation & QA Infrastructure
+**Axos Bank | San Diego, CA — 100% on-site | Apr 2022 – Present (3y 9m)** · **W2**
 
 - **6-month backlog → eliminated in 4 weeks** as sole engineer using Cursor AI + Postman Flows + MCP. API coverage 40% → 95%. Costs -75%. Releases +300%.
 - **Multi-LLM agent system** (Ollama + GPT-4o): test updates -90%. Autonomous test evolution.
@@ -133,7 +149,7 @@ The Docker stack starts PostgreSQL, Spring Boot API, and React admin UI together
 ---
 
 ### Sr. SDET — Enterprise API Framework
-**OfferUp | Remote (Mexico) | Jul 2021 – Mar 2022 (9 months)**
+**OfferUp | Remote (Mexico) | Jul 2021 – Mar 2022 (9 months)** · **Full-Time**
 
 - **API framework from zero** (Java, Rest-Assured, JUnit5). Regression time -70%.
 - **Appium iOS/Android automation**: 85% coverage. Critical journeys protected.
@@ -142,15 +158,15 @@ The Docker stack starts PostgreSQL, Spring Boot API, and React admin UI together
 ---
 
 ### Automation Mentor — Curriculum & Training
-**QA Minds Lab | Guadalajara, Mexico | Feb 2021 – Mar 2022 (14 months)**
+**QA Minds Lab | Guadalajara, Mexico | Feb 2021 – Mar 2022 (14 months)** · **Full-Time**
 
 - Created full automation curriculum (Selenium, Java, Maven, TestNG, OOP, design patterns).
 - **80% of 50+ students hired** into automation roles within 6 months.
 
 ---
 
-### Lead Automation Engineer | Engineering Manager (Contract)
-**EPAM Systems | Mexico | Jul 2019 – Jul 2021 (2y 1m)**
+### Lead Automation Engineer | Engineering Manager
+**EPAM Systems | Mexico | Jul 2019 – Jul 2021 (2y 1m)** · **Full-Time**
 
 - **Built 15+ engineer team** from hiring to retention. Team competency +40% in Year 1.
 - **WinApp Driver + C# framework**: 80% coverage from zero for Microsoft desktop apps.
@@ -158,15 +174,15 @@ The Docker stack starts PostgreSQL, Spring Boot API, and React admin UI together
 
 ---
 
-### Sr. Automation Tester (Contract)
-**Cognizant | Mexico | Dec 2018 – Jul 2019 (8 months)**
+### Sr. Automation Tester
+**Cognizant | Mexico | Dec 2018 – Jul 2019 (8 months)** · **Full-Time**
 
 - Technical lead for client delivery. 100% requirement coverage.
 - **Canary releases + RestSharp API + Selenium UI**: 75% API coverage. Regression -50%. Incidents -35%.
 
 ---
 
-## 📜 Earlier Engagements
+## 📜 Earlier Experience
 
 | Role | Company | Key Result |
 |------|---------|------------|
@@ -214,6 +230,8 @@ The Docker stack starts PostgreSQL, Spring Boot API, and React admin UI together
 
 ---
 
+<!-- RESTORE_WHEN_LLC_READY: Ready-to-Use for Recruiters -->
+<!-- B2B_CONTENT_START
 ## ✅ Ready-to-Use for Recruiters
 
 **For US clients:**
@@ -232,6 +250,7 @@ The Docker stack starts PostgreSQL, Spring Boot API, and React admin UI together
 **Contact:** marco_dejesus@live.com · +1 858 933 4510 · [LinkedIn](https://www.linkedin.com/in/marco-antonio-de-jesus-ciriaco/)
 
 ---
+B2B_CONTENT_END -->
 
 ## 🛠 This Repo: Technologies Demonstrated
 
